@@ -96,20 +96,20 @@ public class ArtOrganizationController : ControllerBase
         }
         try
         {      
-            var organizationOld = _dbContext.ArtOrganizations.Find(id);
+            var existingOrganization = _dbContext.ArtOrganizations.Find(id);
 
-            if (organizationOld == null) return Problem(
+            if (existingOrganization == null) return Problem(
                 statusCode: 404,
                 title: "Organization cannot be found",
                 detail: $"Organization with id:{id} cannot be found!"
             );
             
-            organizationOld.Name = organization.Name;
-            organizationOld.Description = organization.Description;
-            organizationOld.Email = organization.Email;
+            existingOrganization.Name = organization.Name;
+            existingOrganization.Description = organization.Description;
+            existingOrganization.Email = organization.Email;
 
             _dbContext.SaveChanges();
-            return Ok(organizationOld);
+            return Ok(existingOrganization);
 
         }
         catch (Exception exp)
