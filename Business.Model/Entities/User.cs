@@ -8,19 +8,19 @@ public class User
     public int UserId { get; set; }
     
     [Required, StringLength(50, MinimumLength = 3)]
-    public string LoginName { get; set; }
+    public string LoginName { get; set; } = string.Empty;
 
-    [Required] // zakładam, że hash ma maksymalną długość
-    public string PasswordHash { get; set; }
+    [Required]
+    public string PasswordHash { get; set; } = string.Empty;
 
     [Required, EmailAddress, StringLength(254)]
-    public string Email { get; set; }
+    public string Email { get; set; } = string.Empty;
 
     [Required, StringLength(50, MinimumLength = 1)]
-    public string FirstName { get; set; }
+    public string FirstName { get; set; } = string.Empty;
 
     [Required, StringLength(50, MinimumLength = 1)]
-    public string LastName { get; set; }
+    public string LastName { get; set; } = string.Empty;
     
     public UserRole? Role { get; set; }
     public int? ArtOrganizationId { get; set; }
