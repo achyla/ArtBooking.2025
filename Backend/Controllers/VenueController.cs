@@ -2,7 +2,11 @@ using Business.Model.Data;
 using Business.Model.Entities.Venues;
 using Xtech.Common.Pagination;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
+namespace Backend.Controllers;
+
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class VenueController : ControllerBase

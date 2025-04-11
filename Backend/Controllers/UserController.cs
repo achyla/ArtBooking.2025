@@ -1,12 +1,12 @@
 using Business.Model.Data;
 using Business.Model.Entities.Users;
 using Xtech.Common.Pagination;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
+namespace Backend.Controllers;
+
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class UserController : ControllerBase

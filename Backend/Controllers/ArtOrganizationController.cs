@@ -1,11 +1,12 @@
-using Business.Model.Data;
-using Business.Model.Entities.Organizations;
 using Xtech.Common.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using Business.Application.Services.Organizations;
-using System;
 using Business.Application.DTOs.Organizations;
+using Microsoft.AspNetCore.Authorization;
 
+namespace Backend.Controllers;
+
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ArtOrganizationController : ControllerBase
