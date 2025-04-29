@@ -3,6 +3,7 @@ using Business.Model.Data;
 using Business.Model.Entities.Organizations;
 using Business.Model.Entities.Events;
 using Business.Model.Entities.Events.Enums;
+using Business.Model.Entities.Venues;
 using System.Collections.Generic;
 
 namespace Storage.Mockup.DbSeed;
@@ -264,6 +265,111 @@ public class ArtBookingDbSeeder
                 }
             };
 
+            var venues = new List<Venue>
+            {
+                new Venue
+                {
+                    Name = "Teatr Bagatela - Scena Główna",
+                    Description = "Główna scena teatralna z widownią na 350 osób, znana z premierowych spektakli",
+                    ArtOrganizationId = orgBagatela.ArtOrganizationId,
+                    Address = $"{orgBagatela.Street} {orgBagatela.AddressNumber}",
+                    City = orgBagatela.Town,
+                    State = "Małopolskie",
+                    Email = "rezerwacje@teatrbagatela.pl",
+                    PhoneNumber = orgBagatela.PhoneNumber,
+                    ImageUrl = orgBagatela.LogoUrl,
+                    Website = orgBagatela.Website,
+                    Capacity = 350,
+                    PostalCode = orgBagatela.PostalCode,
+                    Country = orgBagatela.Country,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedById = 1,
+                    UpdatedAt = DateTime.UtcNow,
+                    UpdatedById = 1
+                },
+                new Venue
+                {
+                    Name = "Multikino Kraków - Sala Premium",
+                    Description = "Nowoczesna sala kinowa z projektorem laserowym i systemem dźwięku Dolby Atmos",
+                    ArtOrganizationId = orgMultikino.ArtOrganizationId,
+                    Address = $"{orgMultikino.Street} {orgMultikino.AddressNumber}",
+                    City = orgMultikino.Town,
+                    State = "Małopolskie",
+                    Email = "rezerwacje@multikino.pl",
+                    PhoneNumber = orgMultikino.PhoneNumber,
+                    ImageUrl = orgMultikino.LogoUrl,
+                    Website = orgMultikino.Website,
+                    Capacity = 280,
+                    PostalCode = orgMultikino.PostalCode,
+                    Country = orgMultikino.Country,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedById = 1,
+                    UpdatedAt = DateTime.UtcNow,
+                    UpdatedById = 1
+                },
+                new Venue
+                {
+                    Name = "Muzeum Narodowe - Galeria Sztuki Polskiej",
+                    Description = "Główna galeria prezentująca kolekcję malarstwa polskiego XIX i XX wieku",
+                    ArtOrganizationId = orgMuzeumNarodowe.ArtOrganizationId,
+                    Address = $"{orgMuzeumNarodowe.Street} {orgMuzeumNarodowe.AddressNumber}",
+                    City = orgMuzeumNarodowe.Town,
+                    State = "Małopolskie",
+                    Email = "zwiedzanie@mnk.pl",
+                    PhoneNumber = orgMuzeumNarodowe.PhoneNumber,
+                    ImageUrl = orgMuzeumNarodowe.LogoUrl,
+                    Website = orgMuzeumNarodowe.Website,
+                    Capacity = 150,
+                    PostalCode = orgMuzeumNarodowe.PostalCode,
+                    Country = orgMuzeumNarodowe.Country,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedById = 1,
+                    UpdatedAt = DateTime.UtcNow,
+                    UpdatedById = 1
+                },
+                new Venue
+                {
+                    Name = "MPW - Wystawa Główna",
+                    Description = "Immersyjna ekspozycja stała prezentująca historię Powstania Warszawskiego",
+                    ArtOrganizationId = orgMuzeumPowstania.ArtOrganizationId,
+                    Address = $"{orgMuzeumPowstania.Street} {orgMuzeumPowstania.AddressNumber}",
+                    City = orgMuzeumPowstania.Town,
+                    State = "Mazowieckie",
+                    Email = "ekspozycja@1944.pl",
+                    PhoneNumber = orgMuzeumPowstania.PhoneNumber,
+                    ImageUrl = orgMuzeumPowstania.LogoUrl,
+                    Website = orgMuzeumPowstania.Website,
+                    Capacity = 120,
+                    PostalCode = orgMuzeumPowstania.PostalCode,
+                    Country = orgMuzeumPowstania.Country,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedById = 1,
+                    UpdatedAt = DateTime.UtcNow,
+                    UpdatedById = 1
+                },
+                new Venue
+                {
+                    Name = "Teatr Bagatela - Scena Kameralna",
+                    Description = "Kameralna scena studyjna dla 80 widzów, przeznaczona do eksperymentalnych przedstawień",
+                    ArtOrganizationId = orgBagatela.ArtOrganizationId,
+                    Address = $"{orgBagatela.Street} {orgBagatela.AddressNumber}",
+                    City = orgBagatela.Town,
+                    State = "Małopolskie",
+                    Email = "kameralna@teatrbagatela.pl",
+                    PhoneNumber = orgBagatela.PhoneNumber,
+                    ImageUrl = orgBagatela.LogoUrl,
+                    Website = orgBagatela.Website,
+                    Capacity = 80,
+                    PostalCode = orgBagatela.PostalCode,
+                    Country = orgBagatela.Country,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedById = 1,
+                    UpdatedAt = DateTime.UtcNow,
+                    UpdatedById = 1
+                },
+            };
+
+            context.Venues.AddRange(venues);
             context.SaveChanges();
         }
     }
