@@ -13,7 +13,6 @@ namespace Business.Application.Services.Venues
     {
         private readonly ArtBookingDbContext _dbContext;
         private readonly IMapper _mapper;
-
         public VenueService(ArtBookingDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
@@ -22,9 +21,12 @@ namespace Business.Application.Services.Venues
 
         public VenueDto CreateVenue(CreateVenueDto venueDto, int? artOrganizationId = null)
         {
+            if (!IsVenueNameUnique(venueDto.Name))
+                throw new InvalidOperationException($"Venue '{venueDto.Name}' already exists.");
+
             var venue = _mapper.Map<Venue>(venueDto);
             venue.CreatedAt = DateTime.UtcNow;
-            venue.ArtOrganizationId = artOrganizationId ?? 0; // Set to 0 if null
+            venue.ArtOrganizationId = artOrganizationId ?? 0;
 
             _dbContext.Venues.Add(venue);
             _dbContext.SaveChanges();
@@ -81,9 +83,10 @@ namespace Business.Application.Services.Venues
         {
             var existingVenue = _dbContext.Venues.Find(id);
             if (existingVenue == null)
-            {
-                return null;
-            }
+                throw new KeyNotFoundException($"Venue with ID {id} not found.");
+
+            if (!IsVenueNameUnique(venueDto.Name, id))
+                throw new InvalidOperationException($"Venue '{venueDto.Name}' already exists.");
 
             _mapper.Map(venueDto, existingVenue);
             _dbContext.SaveChanges();
@@ -99,6 +102,16 @@ namespace Business.Application.Services.Venues
                 _dbContext.Venues.Remove(venue);
                 _dbContext.SaveChanges();
             }
+        }
+        private bool IsVenueNameUnique(string name, int? excludeVenueId = null)
+        {
+            var query = _dbContext.Venues
+                .Where(v => v.Name.ToLower() == name.ToLower());
+
+            if (excludeVenueId.HasValue)
+                query = query.Where(v => v.VenueId != excludeVenueId.Value);
+
+            return !query.Any();
         }
     }
 }
